@@ -27,7 +27,8 @@ class SetTest(unittest.TestCase):
         assert len(s.groups) == 2
         s.add_element_to_group(0, "Chris")
         assert s.groups[0]["Chris"] == True
-
+        s.add_element_to_group(1, "Johnny")
+        assert s.groups[1]["Johnny"] == True
 
 
 
