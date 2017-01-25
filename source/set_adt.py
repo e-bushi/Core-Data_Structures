@@ -29,6 +29,7 @@ class Set(object):
         group[element] = b
 
 
+
     def remove(self):
         '''Remove a group within the set'''
         pass

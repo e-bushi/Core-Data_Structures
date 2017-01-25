@@ -19,6 +19,9 @@ class SetTest(unittest.TestCase):
         assert len(s.groups) == 2
         s.add_group({})
         assert len(s.groups) == 3
+        s.add_group({})
+        assert len(s.groups) == 3
+        
 
 
 
