@@ -19,10 +19,78 @@ def decode(digits, base):
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
     # ...
+    if base == 2:
+        binary_length = len(digits)
+        digit_array =[]
+        decimal = 0
+        for i in digits:
+            if i == "0":
+                digit_array.append(0)
+            else:
+                digit_array.append(1)
+
+        new_digit = digit_array[::-1]
+        for i in range(0, binary_length):
+            if new_digit[i] == 1:
+                decimal += pow(base,i)
+
+        return(decimal)
+
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
+    elif base == 16:
+        _length = len(digits)
+        hex_digits = []
+        decimal = 0
+        hex_alpha_value = {"a": 10, "b": 11,
+        "c": 12, "d": 13, "e": 14, "f":15}
+
+        for digit in digits:
+            if digit in hex_alpha_value:
+                hex_digits.append(hex_alpha_value[digit])
+            else:
+                hex_digits.append(int(digit))
+
+        reversed_hex_digits = hex_digits[::-1]
+
+
+        for i in range(0, _length):
+            decimal += reversed_hex_digits[i] * pow(base, i)
+
+
+        return decimal
+
+
     # TODO: Decode digits from any base (2 up to 36)
     # ...
+    else:
+        _length = len(digits)
+        hex_digits = []
+        decimal = 0
+        char_num_val_arr = [l for l in string.ascii_lowercase]
+        hex_char_val = {}
+
+        value = 10
+        for i in range(0, len(char_num_val_arr)):
+            hex_char_val[char_num_val_arr[i]] = value
+            value += 1
+
+
+        for digit in digits:
+            if digit in hex_char_val:
+                hex_digits.append(hex_char_val[digit])
+            else:
+                hex_digits.append(int(digit))
+
+        reversed_hex_digits = hex_digits[::-1]
+
+
+        for i in range(0, _length):
+            decimal += reversed_hex_digits[i] * pow(base, i)
+
+
+        return decimal
+
 
 
 def encode(number, base):
