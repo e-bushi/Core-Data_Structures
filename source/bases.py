@@ -108,6 +108,40 @@ def encode(number, base):
     # ...
     # TODO: Encode number in any base (2 up to 36)
     # ...
+    exp = 0 #holds exponent value
+    digit_value = 0 #keeps track of the value that will be inputted into the string
+    new_base_num_string = "" # the base # string to be returned
+
+
+    #determines what the largest power will be before it is larger than the number inputted
+    while pow(base, exp) <= number:
+        exp += 1
+
+    #while loop stops when the exponent value is less than zero
+    while exp >= 0:
+
+        #determines if power is smaller than number, if so the value of the digit is incremented and number inputted is decremented by the power
+        if pow(base, exp) <= number:
+            digit_value += 1
+            number -= pow(base, exp)
+
+        #power is greater than number
+        else:
+
+            #retrieves the string ascii equivalent if the digit value is 10 or greater
+            if digit_value >= 10:
+                digit_value = chr(digit_value + 87)
+
+            #adds new digit to base # string, returns digit to zero and decrements exponent value by one
+            new_base_num_string += str(digit_value)
+            digit_value = 0
+            exp -= 1
+
+    #checks value first element, if value is zero return string without first value
+    if new_base_num_string[0] == "0":
+        return new_base_num_string[1:]
+    else:
+        return new_base_num_string
 
 
 def convert(digits, base1, base2):
@@ -127,6 +161,14 @@ def convert(digits, base1, base2):
     # ...
     # TODO: Convert digits from any base to any base (2 up to 36)
     # ...
+    #converts first base to decimal
+    decimal_number = decode(digits, base1)
+
+    #converts decimal to second base
+    new_base_string = encode(decimal_number, base2)
+
+    #return second base string
+    return new_base_string
 
 
 def main():
