@@ -9,12 +9,30 @@ def factorial(n):
     # implement factorial_iterative and factorial_recursive below, then
     # change this to call your implementation to verify it passes all tests
     # return factorial_iterative(n)
-    return factorial_recursive(n)
+    return factorial_iterative(n)
 
 
 def factorial_iterative(n):
     # TODO: implement the factorial function iteratively here
-    pass
+    factorial_product = n
+    iterations = n - 1
+
+    #factorial(0) will always equate to 1
+    if n == 0:
+        return 1
+
+
+    while iterations > 0:
+        #factorial product times its immediate descendant number
+        factorial_product *= (n - 1)
+
+        #decrement iteration to prevent infinite loop
+        iterations -= 1
+
+        #decrement number to make sure factorial_product wont be mulitiplied by itself
+        n -= 1
+
+    return factorial_product
     # once implemented, change factorial (above) to call factorial_iterative
     # to verify that your iterative implementation passes all tests
 
