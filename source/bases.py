@@ -1,4 +1,4 @@
-#!python
+ #!python
 
 import string
 # Hint: Use these string constants to encode/decode hexadecimal digits and more
