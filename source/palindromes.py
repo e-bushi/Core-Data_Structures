@@ -22,6 +22,21 @@ def is_palindrome_iterative(text):
     pass
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
+    altered_input_text = text.replace(" ", "")
+
+    for c in string.punctuation:
+        if c in altered_input_text:
+            altered_input_text = altered_input_text.replace(c, "")
+            
+    text_reversed = ""
+
+    for i in range(1, len(altered_input_text) + 1):
+        text_reversed += altered_input_text[-i]
+
+    if text_reversed.lower() == altered_input_text.lower():
+        return True
+    else:
+        return False
 
 
 def is_palindrome_recursive(text, left=None, right=None):
