@@ -22,17 +22,24 @@ def is_palindrome_iterative(text):
     pass
     # once implemented, change is_palindrome to call is_palindrome_iterative
     # to verify that your iterative implementation passes all tests
+
+    #returns inputted text without spaces
     altered_input_text = text.replace(" ", "")
 
+    #loop returns inputted text with punctuation
     for c in string.punctuation:
         if c in altered_input_text:
             altered_input_text = altered_input_text.replace(c, "")
-            
+
+    #empty palindrome string to test
     text_reversed = ""
 
+    #appends characters in reverse order to text_reversed variable
     for i in range(1, len(altered_input_text) + 1):
         text_reversed += altered_input_text[-i]
+        
 
+    #determines if reversed string is the same as the inputted altered text, if so return True - false otherwise
     if text_reversed.lower() == altered_input_text.lower():
         return True
     else:
