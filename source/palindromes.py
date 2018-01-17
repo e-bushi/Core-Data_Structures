@@ -37,7 +37,7 @@ def is_palindrome_iterative(text):
     #appends characters in reverse order to text_reversed variable
     for i in range(1, len(altered_input_text) + 1):
         text_reversed += altered_input_text[-i]
-        
+
 
     #determines if reversed string is the same as the inputted altered text, if so return True - false otherwise
     if text_reversed.lower() == altered_input_text.lower():
@@ -51,6 +51,32 @@ def is_palindrome_recursive(text, left=None, right=None):
     pass
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
+
+    #determines whether the default values are set
+    if left is None and right is None:
+        left = 0
+        right = len(text) - 1
+
+    #condition that keeps track of position
+    if right > left:
+
+        #determines if the characters in designated postions equate to a space or punctuation. If so, go to the next recursive level and iterate the next postion without comparing
+        if text[left] in string.punctuation or text[left] == " ":
+            left += 1
+            return is_palindrome_recursive(text, left, right)
+        elif text[right] in string.punctuation or text[right] == " ":
+            right -= 1
+            return is_palindrome_recursive(text, left, right)
+
+        #determines if characters on either side of string are the same if so return
+        if text[left] == text[right]:
+            right -= 1
+            left += 1
+            return is_palindrome_recursive(text, left, right)
+        else:
+            return False
+
+    return True
 
 
 def main():
