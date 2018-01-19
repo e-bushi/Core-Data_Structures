@@ -5,6 +5,58 @@ def contains(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
+    index_of_pattern = 0
+
+    #the largest index
+    pattern_index_length = len(pattern)
+
+    #the length of the patterns
+    pattern_length = len(pattern)
+
+    #index of text
+    index = 0
+
+    matches = 0
+
+    #the indices of the matches
+    array_of_matches_indices = []
+
+    temp_array_of_matches = []
+
+    if pattern == '':
+        return True
+
+    while index < len(text):
+
+        if pattern[index_of_pattern] == text[index]:
+            temp_array_of_matches.append(index)
+
+            index_of_pattern += 1
+            index += 1
+            matches += 1
+
+            if matches == pattern_length:
+                array_of_matches_indices.extend(temp_array_of_matches)
+                matches = 0
+                index_of_pattern = 0
+
+                if index == len(text):
+                    break
+
+        if pattern[index_of_pattern] != text[index]:
+            index_of_pattern = 0
+            matches = 0
+            temp_array_of_matches = []
+
+            if pattern[index_of_pattern] != text[index]:
+                index += 1
+
+
+    if len(array_of_matches_indices) > 0 and len(array_of_matches_indices) % pattern_length == 0:
+        return True
+    else:
+        return False
+
 
 
 def find_index(text, pattern):
