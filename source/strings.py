@@ -40,8 +40,8 @@ def contains(text, pattern):
                 matches = 0
                 index_of_pattern = 0
 
-                if index == len(text):
-                    break
+            if index == len(text):
+                break
 
         if pattern[index_of_pattern] != text[index]:
             index_of_pattern = 0
@@ -50,6 +50,7 @@ def contains(text, pattern):
 
             if pattern[index_of_pattern] != text[index]:
                 index += 1
+
 
 
     if len(array_of_matches_indices) > 0 and len(array_of_matches_indices) % pattern_length == 0:
