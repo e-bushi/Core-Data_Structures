@@ -23,7 +23,7 @@ class SetTest(unittest.TestCase):
         s.add_group({})
         assert len(s.groups) == 3
         s.add_group({})
-        assert len(s.groups) == 3
+        assert len(s.groups) == 4
 
 
     def test_add_element_to_group(self):
