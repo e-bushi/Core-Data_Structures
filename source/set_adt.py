@@ -29,7 +29,6 @@ class Set(object):
         group[element] = b
 
 
-
     def remove(self):
         '''Remove a group within the set'''
         pass
@@ -46,4 +45,5 @@ class Set(object):
 if __name__ == '__main__':
     s = Set(4)
     s.add_element_to_group(0, "Chris")
+    s.add_element_to_group(1, "Johnny")
     print(s.__repr__())
