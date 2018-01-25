@@ -34,7 +34,10 @@ class SetTest(unittest.TestCase):
 
 
     def test_remove(self):
-        pass
+        s = Set()
+        assert len(s.groups) == 2
+        s.remove_group(1)
+        assert len(s.groups) == 1
 
 
 
