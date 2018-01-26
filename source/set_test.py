@@ -10,6 +10,9 @@ class SetTest(unittest.TestCase):
         s = Set()
         assert len(s.groups) == 2
         assert s.total_num_of_group_elements == 0
+        s = Set(4)
+        assert len(s.groups) == 4
+        assert s.total_num_of_group_elements == 0
 
 
 
