@@ -43,7 +43,5 @@ class SetTest(unittest.TestCase):
         assert len(s.groups) == 1
 
 
-
-
     def test_contains(self):
         pass
