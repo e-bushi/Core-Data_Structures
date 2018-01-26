@@ -15,8 +15,6 @@ class SetTest(unittest.TestCase):
         assert s.total_num_of_group_elements == 0
 
 
-
-
     def test_add_group(self):
         s = Set()
         assert len(s.groups) == 2
