@@ -48,7 +48,6 @@ def is_palindrome_iterative(text):
 
 def is_palindrome_recursive(text, left=None, right=None):
     # TODO: implement the is_palindrome function recursively here
-    pass
     # once implemented, change is_palindrome to call is_palindrome_recursive
     # to verify that your iterative implementation passes all tests
 
@@ -57,16 +56,18 @@ def is_palindrome_recursive(text, left=None, right=None):
         left = 0
         right = len(text) - 1
 
-    #condition that keeps track of position
+    #run if center is not reached
     if right > left:
 
         #determines if the characters in designated postions equate to a space or punctuation. If so, go to the next recursive level and iterate the next postion without comparing
-        if text[left] in string.punctuation or text[left] == " ":
+        while text[left] in string.punctuation or text[left] == " ":
+        # while not text[left].isalpha():
             left += 1
-            return is_palindrome_recursive(text, left, right)
-        elif text[right] in string.punctuation or text[right] == " ":
+            # return is_palindrome_recursive(text, left, right)
+
+        while text[right] in string.punctuation or text[right] == " ":
             right -= 1
-            return is_palindrome_recursive(text, left, right)
+            # return is_palindrome_recursive(text, left, right)
 
         #determines if characters on either side of string are the same if so return
         if text[left] == text[right]:
