@@ -33,6 +33,15 @@ class SetTest(unittest.TestCase):
         assert s.groups[1]["Johnny"] == True
 
 
+    def test_number_of_items(self):
+        s = Set()
+        assert len(s.groups) == 2
+        s.add_element_to_group(0, "Chris")
+        assert s.groups[0]["Chris"] == True
+        s.add_element_to_group(1, "Johnny")
+        assert s.groups[1]["Johnny"] == True
+
+        assert s.number_of_elements() == 2
 
     def test_remove(self):
         s = Set()
@@ -42,4 +51,7 @@ class SetTest(unittest.TestCase):
 
 
     def test_contains(self):
-        pass
+        s = Set()
+        assert len(s.groups) == 2
+        s.add_element_to_group(0, "Chris")
+        assert s.contains("Chris") == True
