@@ -1,5 +1,5 @@
 #!python
-
+from collections import deque
 
 class BinaryTreeNode(object):
 
@@ -101,7 +101,7 @@ class BinarySearchTree(object):
         # Find a node with the given item, if any
         node = self._find_node(item)
         # TODO: Return the node's data if found, or None
-        return node.data if True else None
+        return node if True else None
 
     def insert(self, item):
         """Insert the given item in order into this binary search tree.
@@ -297,21 +297,25 @@ class BinarySearchTree(object):
         Start at the given node and visit each node with the given function.
         TODO: Running time: ??? Why and under what conditions?
         TODO: Memory usage: ??? Why and under what conditions?"""
-        pass
+
         # TODO: Create queue to store nodes not yet traversed in level-order
         queue = deque()
         # TODO: Enqueue given starting node
-        queue.enqueue(start_node)
+        queue.append(start_node)
         # TODO: Loop until queue is empty
-        # while :
+        while len(queue) > 0:
             # TODO: Dequeue node at front of queue
-            # node = ...
+            dequeued_node = queue.popleft()
             # TODO: Visit this node's data with given function
-
+            visit(dequeued_node.data)
             # TODO: Enqueue this node's left child, if it exists
-
+            if dequeued_node.left:
+                queue.append(dequeued_node.left)
             # TODO: Enqueue this node's right child, if it exists
+            if dequeued_node.right:
+                queue.append(dequeued_node.right)
 
+            print(queue)
 
 
 def test_binary_search_tree():
