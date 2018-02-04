@@ -299,9 +299,9 @@ class BinarySearchTree(object):
         TODO: Memory usage: ??? Why and under what conditions?"""
         pass
         # TODO: Create queue to store nodes not yet traversed in level-order
-        # queue = ...
+        queue = deque()
         # TODO: Enqueue given starting node
-
+        queue.enqueue(start_node)
         # TODO: Loop until queue is empty
         # while :
             # TODO: Dequeue node at front of queue
