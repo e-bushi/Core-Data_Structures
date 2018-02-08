@@ -6,11 +6,28 @@ def is_sorted(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Check that all adjacent items are in order, return early if not
+    #loop through elements within items
     for i in range(0, len(items) - 1):
+        #check if element adjacent to element at index i is greater than itself, if not
+        #return false because list is out of order
         if items[i] > items[i + 1]:
             return False
-
+    #return true if for loop exits with out returning false
     return True
+
+
+def swap(first, second, items):
+    first_number = items[first]
+    second_number = items[second]
+    value_holder = 0
+
+    value_holder = first_number
+    first_number = second_number
+    second_number = value_holder
+
+    items[first] = first_number
+    items[second] = second_number
+    return items
 
 
 def bubble_sort(items):
@@ -20,26 +37,24 @@ def bubble_sort(items):
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Repeat until all items are in sorted order
     # TODO: Swap adjacent items that are out of order
+
+    #if items list is empty than return it without changes
     if len(items) == 0:
         return items
 
+    #while loop will only exit when it is sorted
     while is_sorted(items) is False:
-
+        #loop through indices of items
         for i in range(0, len(items) - 1):
+            #if element at index i is greater that is adjacent element enter if statement
+            if i == len(items) - 1:
+                break
 
             if items[i] > items[i + 1]:
+                #return a list with updated swapped values
+                items = swap(i, i+1, items)
 
-                first_number = items[i]
-                second_number = items[i+1]
-                value_holder = 0
-
-                value_holder = first_number
-                first_number = second_number
-                second_number = value_holder
-
-                items[i] = first_number
-                items[i + 1] = second_number
-                
+    #return sorted list
     return items
 
 
@@ -51,6 +66,33 @@ def selection_sort(items):
     # TODO: Repeat until all items are in sorted order
     # TODO: Find minimum item in unsorted items
     # TODO: Swap it with first unsorted item
+    if len(items) == 0:
+        return items
+
+    unsorted_index = 0
+    minimum = items[0]
+    minimum_position = 0
+
+
+    while is_sorted(items) is False:
+
+        for i in range(unsorted_index, len(items) - 1):
+
+            if items[i] < minimum:
+                minimum = items[i]
+                minimum_position = i
+
+        items = swap(unsorted_index, minimum_position, items)
+
+        print(items)
+        if unsorted_index < len(items) - 1:
+            unsorted_index += 1
+            minimum = items[unsorted_index]
+        else:
+            unsorted_index = 0
+
+    print(items)
+
 
 
 def insertion_sort(items):
