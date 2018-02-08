@@ -20,6 +20,27 @@ def bubble_sort(items):
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Repeat until all items are in sorted order
     # TODO: Swap adjacent items that are out of order
+    if len(items) == 0:
+        return items
+
+    while is_sorted(items) is False:
+
+        for i in range(0, len(items) - 1):
+
+            if items[i] > items[i + 1]:
+
+                first_number = items[i]
+                second_number = items[i+1]
+                value_holder = 0
+
+                value_holder = first_number
+                first_number = second_number
+                second_number = value_holder
+
+                items[i] = first_number
+                items[i + 1] = second_number
+                
+    return items
 
 
 def selection_sort(items):
