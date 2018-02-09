@@ -93,6 +93,29 @@ def selection_sort(items):
 
     print(items)
 
+def recursive_backwards_checker(left_indx, right_indx, items):
+    """decrement backwards in the array to check against values"""
+    while left_indx >= 0:
+
+        if left_indx == right_indx:
+            return items
+
+        if items[right_indx] >= items[left_indx]:
+
+            right_value = items.pop(right_indx)
+            items.insert(left_indx+1, right_value)
+            return (items, left_indx + 1)
+
+        elif items[right_indx] < items[left_indx]:
+
+            if left_indx == 0:
+                right_value = items.pop(right_indx)
+                items.insert(left_indx, right_value)
+                return (items, left_indx + 1)
+            else:
+                left_indx -= 1
+
+
 
 
 def insertion_sort(items):
@@ -103,6 +126,30 @@ def insertion_sort(items):
     # TODO: Repeat until all items are in sorted order
     # TODO: Take first unsorted item
     # TODO: Insert it in sorted order in front of items
+    if len(items) == 0:
+        return items
+
+    while is_sorted(items) is False:
+            left = 0
+            right = 0
+
+            while right <= len(items) - 1:
+
+                items = recursive_backwards_checker(left, right, items)
+
+                if isinstance(items, tuple):
+                    items = items[0]
+                    left = items[1]
+
+                    if right - left != 1:
+                        left = right
+
+                right += 1
+
+    return items
+
+
+
 
 
 def merge(items1, items2):
