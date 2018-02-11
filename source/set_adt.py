@@ -20,25 +20,86 @@ class Set(object):
         #number of groups within the set
         set_length = len(self.groups)
 
-        #adds a new group to the set
-        self.groups[set_length] = group
+        if type(group) == dict:
+            self.groups[set_length] = group
+        elif type(group) == list:
+
+            for item in group:
+                 self.add_element_to_group(set_length, item)
+
 
     def add_element_to_group(self, key, element, b=True):
         '''Add element to a specific group within the set'''
         group = self.groups[key]
         group[element] = b
 
+        self.total_num_of_group_elements += 1
 
-    def remove(self):
+
+    def number_of_elements(self):
+        '''Return the number of total items there are in each set combined'''
+        group = self.groups
+        item_count = 0
+
+        for item in group.values():
+
+            for keys in item:
+
+                item_count += 1
+
+        self.total_num_of_group_elements = item_count
+
+        return self.total_num_of_group_elements
+
+    def remove_group(self, group):
         '''Remove a group within the set'''
         pass
+        if group not in self.group.keys():
+            raise KeyError("Key is not in set")
+
+        del self.group[group]
 
 
-    def contains(self):
-        '''Returns tuple with that has a boolean value
-        and key of the group that contains element sought after, if element
-        doesn't exist within the set than returns False'''
-        pass
+    def remove_element_from_group(self, group, key):
+        '''remove a specific element within a group in the set'''
+        groups = self.groups
+
+        del groups[group][key]
+
+
+
+    def contains(self, element):
+        '''Returns bool if element exists within the set'''
+        groups = self.groups
+
+        for group in groups.values():
+
+            for item in group.keys():
+
+                if element == item:
+                    return True
+
+        return False
+
+
+    def union(self, other_group):
+        '''Return a new set that is the union of this set and other_set'''
+        groups = self.groups
+        union_group = []
+        union_set = Set()
+
+        for group in groups.values():
+
+            for item in group.keys():
+
+                union_group.append(item)
+
+        union_group.extend(other_group)
+        union_set.add_group(union_group)
+
+        return union_group
+
+
 
 
 
@@ -46,4 +107,6 @@ if __name__ == '__main__':
     s = Set(4)
     s.add_element_to_group(0, "Chris")
     s.add_element_to_group(1, "Johnny")
+    group = ["Jon", "Nana", "Mumu"]
+    s.union(group)
     print(s.__repr__())
