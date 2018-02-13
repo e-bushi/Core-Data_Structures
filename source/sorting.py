@@ -84,14 +84,15 @@ def selection_sort(items):
 
         items = swap(unsorted_index, minimum_position, items)
 
-        print(items)
         if unsorted_index < len(items) - 1:
             unsorted_index += 1
             minimum = items[unsorted_index]
         else:
             unsorted_index = 0
 
-    print(items)
+
+
+
 
 def recursive_backwards_checker(left_indx, right_indx, items):
     """decrement backwards in the array to check against values"""
@@ -114,8 +115,6 @@ def recursive_backwards_checker(left_indx, right_indx, items):
                 return (items, left_indx + 1)
             else:
                 left_indx -= 1
-
-
 
 
 def insertion_sort(items):
@@ -152,7 +151,7 @@ def insertion_sort(items):
 
 
 
-def merge(items1, items2):
+def merge(first_partition, second_partition, original_items):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
@@ -160,6 +159,43 @@ def merge(items1, items2):
     # TODO: Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
+    combined_sorted_array = []
+
+    index_of_first_partition = 0
+    index_of_second_partition = 0
+
+    for i in range(0, len(original_items) - 1):
+
+        if len(first_partition) == 0:
+            combined_sorted_array.append(second_partition[index_of_second_partition])
+            continue
+        elif len(second_partition) == 0:
+            combined_sorted_array.append(first_partition[index_of_first_partition])
+            continue
+
+        if first_partition[index_of_first_partition] < second_partition[index_of_second_partition]:
+            value_popped = first_partition.pop(index_of_first_partition)
+
+            combined_sorted_array.append(value_popped)
+            print(combined_sorted_array)
+
+
+        elif first_partition[index_of_first_partition] == second_partition[index_of_second_partition]:
+            first_value_popped = first_partition.pop(index_of_first_partition)
+            second_value_popped = second_partition.pop(index_of_second_partition)
+
+            combined_sorted_array.append(first_value_popped)
+            combined_sorted_array.append(second_value_popped)
+            print(combined_sorted_array)
+
+        else:
+            value_popped = second_partition.pop(index_of_second_partition)
+            combined_sorted_array.append(value_popped)
+            print(combined_sorted_array)
+
+
+    print("This one is sorted -----> {}".format(combined_sorted_array))
+    return combined_sorted_array
 
 
 def split_sort_merge(items):
@@ -169,8 +205,20 @@ def split_sort_merge(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     # TODO: Split items list into approximately equal halves
+    index_to_split_on = int(len(items) / 2)
+    length_of_items = len(items)
+
+    first_partition = items[:index_to_split_on]
+    second_partition = items[index_to_split_on:]
+
     # TODO: Sort each half using any other sorting algorithm
+    selection_sort(first_partition)
+    selection_sort(second_partition)
+
     # TODO: Merge sorted halves into one list in sorted order
+    items[:] = merge(first_partition, second_partition, items)
+
+
 
 
 def merge_sort(items):
@@ -182,6 +230,20 @@ def merge_sort(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
+    if len(items) < 2:
+        return items
+
+    index_to_split_on = len(items) // 2
+
+    first_partition = items[:index_to_split_on]
+    second_partition = items[index_to_split_on:]
+
+    merge_sort(first_partition)
+    merge_sort(second_partition)
+
+
+    items[:] = merge(first_partition, second_partition, items)
+
 
 
 def random_ints(count=20, min=1, max=50):
@@ -191,7 +253,7 @@ def random_ints(count=20, min=1, max=50):
     return [random.randint(min, max) for _ in range(count)]
 
 
-def test_sorting(sort=bubble_sort, num_items=20, max_value=50):
+def test_sorting(sort=split_sort_merge, num_items=20, max_value=50):
     """Test sorting algorithms with a small list of random items."""
     # Create a list of items randomly sampled from range [1...max_value]
     items = random_ints(num_items, 1, max_value)
