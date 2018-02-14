@@ -1,4 +1,5 @@
 #!python
+from binarytree import BinarySearchTree
 
 
 def is_sorted(items):
@@ -243,6 +244,89 @@ def merge_sort(items):
 
 
     items[:] = merge(first_partition, second_partition, items)
+
+
+
+def divide_on_pivot(half, pivot=0):
+    """Divides items based on pivot structure any index as pivot structure
+    as long as it's within the bounds of the items"""
+
+    half_one = []
+    half_two = []
+
+    #TODO: get the middle index of the array items
+    middle = len(half) // 2
+
+    pivot_value = half.pop(pivot)
+
+    for elements_index in range(0, len(half) - 1):
+
+        if len(half_one) == middle:
+            continue
+
+        if half[elements_index] < pivot_value:
+
+            half_one.append(half[elements_index])
+
+        elif half[elements_index] >= pivot_value:
+
+            half_two.append(half[elements_index])
+
+    if is_sorted(half_one) is False:
+        divide_on_pivot(half_one, pivot)
+
+    if is_sorted(half_two) is False:
+        divide_on_pivot(half_two, pivot)
+
+
+
+def quick_sort(items):
+    """Sort given items by splitting list into two halves using a pivot structure,
+    whose functionality reflects that of a root of a binary tree. List is actually sorted within the conquer phase and reassembled in the combine phase."""
+    if len(items) < 2:
+        return items
+
+    pivot = 0
+
+    store_index = pivot + 1
+
+    index = pivot + 1
+
+    while index <= len(items) - 1:
+
+        if items[index] < items[pivot]:
+            value = items.pop(index)
+            items.insert(store_index, value)
+            store_index += 1
+
+        index += 1
+
+    swap(pivot, store_index - 1, items)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
