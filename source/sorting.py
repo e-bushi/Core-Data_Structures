@@ -247,87 +247,40 @@ def merge_sort(items):
 
 
 
-def divide_on_pivot(half, pivot=0):
-    """Divides items based on pivot structure any index as pivot structure
-    as long as it's within the bounds of the items"""
+def partition(items, low, high):
+    pivot = items[high]
 
-    half_one = []
-    half_two = []
+    i = low - 1
 
-    #TODO: get the middle index of the array items
-    middle = len(half) // 2
+    j = low
 
-    pivot_value = half.pop(pivot)
+    while j <= high - 1:
 
-    for elements_index in range(0, len(half) - 1):
+        if items[j] <= pivot:
+            i += 1
+            items[i], items[j] = items[j], items[i]
 
-        if len(half_one) == middle:
-            continue
+        j += 1
 
-        if half[elements_index] < pivot_value:
-
-            half_one.append(half[elements_index])
-
-        elif half[elements_index] >= pivot_value:
-
-            half_two.append(half[elements_index])
-
-    if is_sorted(half_one) is False:
-        divide_on_pivot(half_one, pivot)
-
-    if is_sorted(half_two) is False:
-        divide_on_pivot(half_two, pivot)
+    temp = items[i + 1]
+    items[i + 1] = pivot
+    items[high] = temp
+    # swap(i+1, pivot, items)
+    return i + 1
 
 
+def quick_sort(items, low=0, high=-1):
 
-def quick_sort(items):
-    """Sort given items by splitting list into two halves using a pivot structure,
-    whose functionality reflects that of a root of a binary tree. List is actually sorted within the conquer phase and reassembled in the combine phase."""
-    if len(items) < 2:
-        return items
+    if high == -1:
+        high = len(items) - 1
 
-    pivot = 0
+    if low < high:
 
-    store_index = pivot + 1
+        pivot = partition(items, low, high)
 
-    index = pivot + 1
+        quick_sort(items, low, pivot - 1)
 
-    while index <= len(items) - 1:
-
-        if items[index] < items[pivot]:
-            value = items.pop(index)
-            items.insert(store_index, value)
-            store_index += 1
-
-        index += 1
-
-    swap(pivot, store_index - 1, items)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        quick_sort(items, pivot + 1, high)
 
 
 def random_ints(count=20, min=1, max=50):
